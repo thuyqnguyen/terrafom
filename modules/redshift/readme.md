@@ -1,1 +1,1 @@
-This module provision a redshift database in a vpc with proper role to access a bucket
+This module provision a redshift database in a vpc. It is assigned the role to access a a specific bucket
