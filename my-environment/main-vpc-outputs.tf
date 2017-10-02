@@ -1,4 +1,4 @@
-# outputs from my-environment
+# outputs from module vpc
 
 output "region" {
   value = "${var.region}"
