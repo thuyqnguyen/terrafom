@@ -1,0 +1,223 @@
+data.aws_region.current: Refreshing state...
+data.aws_availability_zones.available: Refreshing state...
+module.my-s3.aws_iam_role.s3_bucket_role: Creating...
+  arn:                   "" => "<computed>"
+  assume_role_policy:    "" => "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"redshift.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n"
+  create_date:           "" => "<computed>"
+  force_detach_policies: "" => "false"
+  name:                  "" => "thuy-redshift-bucket-role"
+  path:                  "" => "/"
+  unique_id:             "" => "<computed>"
+module.my-s3.aws_s3_bucket.s3_bucket: Creating...
+  acceleration_status: "" => "<computed>"
+  acl:                 "" => "private"
+  arn:                 "" => "<computed>"
+  bucket:              "" => "thuy-redshift-bucket"
+  bucket_domain_name:  "" => "<computed>"
+  force_destroy:       "" => "false"
+  hosted_zone_id:      "" => "<computed>"
+  region:              "" => "us-west-1"
+  request_payer:       "" => "<computed>"
+  versioning.#:        "" => "<computed>"
+  website_domain:      "" => "<computed>"
+  website_endpoint:    "" => "<computed>"
+module.my-vpc.aws_vpc.vpc: Creating...
+  assign_generated_ipv6_cidr_block: "" => "false"
+  cidr_block:                       "" => "10.101.0.0/16"
+  default_network_acl_id:           "" => "<computed>"
+  default_route_table_id:           "" => "<computed>"
+  default_security_group_id:        "" => "<computed>"
+  dhcp_options_id:                  "" => "<computed>"
+  enable_classiclink:               "" => "<computed>"
+  enable_classiclink_dns_support:   "" => "<computed>"
+  enable_dns_hostnames:             "" => "true"
+  enable_dns_support:               "" => "true"
+  instance_tenancy:                 "" => "<computed>"
+  ipv6_association_id:              "" => "<computed>"
+  ipv6_cidr_block:                  "" => "<computed>"
+  main_route_table_id:              "" => "<computed>"
+  tags.%:                           "" => "1"
+  tags.Name:                        "" => "fox"
+module.my-s3.aws_iam_role.s3_bucket_role: Creation complete after 1s (ID: thuy-redshift-bucket-role)
+module.my-s3.aws_s3_bucket.s3_bucket: Creation complete after 4s (ID: thuy-redshift-bucket)
+module.my-s3.aws_iam_policy.s3_bucket_policy: Creating...
+  arn:    "" => "<computed>"
+  name:   "" => "thuy-redshift-bucket-policy"
+  path:   "" => "/"
+  policy: "" => "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:*\"\n            ],\n            \"Resource\": \"arn:aws:s3:::thuy-redshift-bucket\"\n        }\n    ]\n}\n"
+module.my-vpc.aws_vpc.vpc: Creation complete after 4s (ID: vpc-4b510a2f)
+module.my-vpc.aws_internet_gateway.vpc-igw: Creating...
+  vpc_id: "" => "vpc-4b510a2f"
+module.my-vpc.aws_subnet.subnet_public[0]: Creating...
+  assign_ipv6_address_on_creation: "" => "false"
+  availability_zone:               "" => "us-west-1a"
+  cidr_block:                      "" => "10.101.0.0/24"
+  ipv6_cidr_block:                 "" => "<computed>"
+  ipv6_cidr_block_association_id:  "" => "<computed>"
+  map_public_ip_on_launch:         "" => "false"
+  tags.%:                          "" => "1"
+  tags.Name:                       "" => "fox-public-us-west-1a"
+  vpc_id:                          "" => "vpc-4b510a2f"
+module.my-vpc.aws_subnet.subnet_public[1]: Creating...
+  assign_ipv6_address_on_creation: "" => "false"
+  availability_zone:               "" => "us-west-1c"
+  cidr_block:                      "" => "10.101.1.0/24"
+  ipv6_cidr_block:                 "" => "<computed>"
+  ipv6_cidr_block_association_id:  "" => "<computed>"
+  map_public_ip_on_launch:         "" => "false"
+  tags.%:                          "" => "1"
+  tags.Name:                       "" => "fox-public-us-west-1c"
+  vpc_id:                          "" => "vpc-4b510a2f"
+module.my-vpc.aws_subnet.subnet_private[0]: Creating...
+  assign_ipv6_address_on_creation: "" => "false"
+  availability_zone:               "" => "us-west-1a"
+  cidr_block:                      "" => "10.101.2.0/24"
+  ipv6_cidr_block:                 "" => "<computed>"
+  ipv6_cidr_block_association_id:  "" => "<computed>"
+  map_public_ip_on_launch:         "" => "false"
+  tags.%:                          "" => "1"
+  tags.Name:                       "" => "fox-private-us-west-1a"
+  vpc_id:                          "" => "vpc-4b510a2f"
+module.my-vpc.aws_subnet.subnet_private[1]: Creating...
+  assign_ipv6_address_on_creation: "" => "false"
+  availability_zone:               "" => "us-west-1c"
+  cidr_block:                      "" => "10.101.3.0/24"
+  ipv6_cidr_block:                 "" => "<computed>"
+  ipv6_cidr_block_association_id:  "" => "<computed>"
+  map_public_ip_on_launch:         "" => "false"
+  tags.%:                          "" => "1"
+  tags.Name:                       "" => "fox-private-us-west-1c"
+  vpc_id:                          "" => "vpc-4b510a2f"
+module.my-vpc.aws_internet_gateway.vpc-igw: Creation complete after 1s (ID: igw-1666a672)
+module.my-vpc.aws_route_table.vpc_internet: Creating...
+  propagating_vgws.#:                         "" => "<computed>"
+  route.#:                                    "" => "1"
+  route.3815086408.cidr_block:                "" => "0.0.0.0/0"
+  route.3815086408.egress_only_gateway_id:    "" => ""
+  route.3815086408.gateway_id:                "" => "igw-1666a672"
+  route.3815086408.instance_id:               "" => ""
+  route.3815086408.ipv6_cidr_block:           "" => ""
+  route.3815086408.nat_gateway_id:            "" => ""
+  route.3815086408.network_interface_id:      "" => ""
+  route.3815086408.vpc_peering_connection_id: "" => ""
+  tags.%:                                     "" => "1"
+  tags.Name:                                  "" => "route-fox-to-internet"
+  vpc_id:                                     "" => "vpc-4b510a2f"
+module.my-s3.aws_iam_policy.s3_bucket_policy: Creation complete after 1s (ID: arn:aws:iam::636358937697:policy/thuy-redshift-bucket-policy)
+module.my-s3.aws_iam_policy_attachment.s3_bucket_policy_attachment: Creating...
+  name:            "" => "thuy-redshift-bucket-policy-attachment"
+  policy_arn:      "" => "arn:aws:iam::636358937697:policy/thuy-redshift-bucket-policy"
+  roles.#:         "" => "1"
+  roles.656690768: "" => "thuy-redshift-bucket-role"
+module.my-vpc.aws_subnet.subnet_private[0]: Creation complete after 1s (ID: subnet-7ec10519)
+module.my-vpc.aws_subnet.subnet_private[1]: Creation complete after 1s (ID: subnet-899b91d1)
+module.my-vpc.aws_subnet.subnet_public[0]: Creation complete after 1s (ID: subnet-92c703f5)
+module.my-redshift.aws_redshift_subnet_group.redshift_subnet: Creating...
+  description:           "" => "Managed by Terraform"
+  name:                  "" => "thuy-redshift-cluster"
+  subnet_ids.#:          "" => "2"
+  subnet_ids.2736341489: "" => "subnet-7ec10519"
+  subnet_ids.4294740065: "" => "subnet-899b91d1"
+  tags.%:                "" => "1"
+  tags.environment:      "" => "Test"
+module.my-vpc.aws_subnet.subnet_public[1]: Creation complete after 1s (ID: subnet-51848e09)
+module.my-redshift.aws_redshift_subnet_group.redshift_subnet: Creation complete after 1s (ID: thuy-redshift-cluster)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Creating...
+  allow_version_upgrade:               "" => "true"
+  automated_snapshot_retention_period: "" => "1"
+  availability_zone:                   "" => "<computed>"
+  bucket_name:                         "" => "<computed>"
+  cluster_identifier:                  "" => "thuy-redshift-cluster"
+  cluster_parameter_group_name:        "" => "<computed>"
+  cluster_public_key:                  "" => "<computed>"
+  cluster_revision_number:             "" => "<computed>"
+  cluster_security_groups.#:           "" => "<computed>"
+  cluster_subnet_group_name:           "" => "thuy-redshift-cluster"
+  cluster_type:                        "" => "<computed>"
+  cluster_version:                     "" => "1.0"
+  database_name:                       "" => "testdb"
+  enable_logging:                      "" => "false"
+  encrypted:                           "" => "<computed>"
+  endpoint:                            "" => "<computed>"
+  enhanced_vpc_routing:                "" => "<computed>"
+  iam_roles.#:                         "" => "1"
+  iam_roles.1845010595:                "" => "arn:aws:iam::636358937697:role/thuy-redshift-bucket-role"
+  kms_key_id:                          "" => "<computed>"
+  master_password:                     "<sensitive>" => "<sensitive>"
+  master_username:                     "" => "foo"
+  node_type:                           "" => "dc1.large"
+  number_of_nodes:                     "" => "1"
+  port:                                "" => "5439"
+  preferred_maintenance_window:        "" => "<computed>"
+  publicly_accessible:                 "" => "true"
+  s3_key_prefix:                       "" => "<computed>"
+  skip_final_snapshot:                 "" => "false"
+  vpc_security_group_ids.#:            "" => "<computed>"
+module.my-vpc.aws_route_table.vpc_internet: Creation complete after 2s (ID: rtb-fe618999)
+module.my-vpc.aws_route_table_association.vpc_pub_internet[0]: Creating...
+  route_table_id: "" => "rtb-fe618999"
+  subnet_id:      "" => "subnet-92c703f5"
+module.my-vpc.aws_route_table_association.vpc_pub_internet[1]: Creating...
+  route_table_id: "" => "rtb-fe618999"
+  subnet_id:      "" => "subnet-51848e09"
+module.my-vpc.aws_route_table_association.vpc_pub_internet[1]: Creation complete after 0s (ID: rtbassoc-84e4a2e3)
+module.my-vpc.aws_route_table_association.vpc_pub_internet[0]: Creation complete after 0s (ID: rtbassoc-23e0a644)
+module.my-s3.aws_iam_policy_attachment.s3_bucket_policy_attachment: Creation complete after 3s (ID: thuy-redshift-bucket-policy-attachment)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (10s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (20s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (30s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (40s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (50s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m0s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m10s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m20s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m30s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m40s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (1m50s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m0s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m10s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m20s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m30s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m40s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (2m50s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m0s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m10s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m20s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m30s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m40s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (3m50s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (4m0s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Still creating... (4m10s elapsed)
+module.my-redshift.aws_redshift_cluster.redshift-cluster: Creation complete after 4m19s (ID: thuy-redshift-cluster)
+
+Apply complete! Resources: 15 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+my-redshift-endpoint = thuy-redshift-cluster.crwws4dka1wv.us-west-1.redshift.amazonaws.com:5439
+my-redshift-identifier = thuy-redshift-cluster
+my-s3-arn = arn:aws:s3:::thuy-redshift-bucket
+my-vpc-id = vpc-4b510a2f
+my-vpc-name = fox
+redshift-database-name = testdb
+region = us-west-1
+vpc_private_subnet_cdirs = [
+    10.101.2.0/24,
+    10.101.3.0/24
+]
+vpc_private_subnet_ids = [
+    subnet-7ec10519,
+    subnet-899b91d1
+]
+vpc_public_subnet_cdirs = [
+    10.101.0.0/24,
+    10.101.1.0/24
+]
+vpc_public_subnet_ids = [
+    subnet-92c703f5,
+    subnet-51848e09
+]
+zone_names = [
+    us-west-1a,
+    us-west-1c
+]

@@ -1,0 +1,198 @@
+Refreshing Terraform state in-memory prior to plan...
+The refreshed state will be used to calculate this plan, but will not be
+persisted to local or remote state storage.
+
+data.aws_region.current: Refreshing state...
+data.aws_availability_zones.available: Refreshing state...
+
+------------------------------------------------------------------------
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
++ module.my-redshift.aws_redshift_cluster.redshift-cluster
+      id:                                          <computed>
+      allow_version_upgrade:                       "true"
+      automated_snapshot_retention_period:         "1"
+      availability_zone:                           <computed>
+      bucket_name:                                 <computed>
+      cluster_identifier:                          "thuy-redshift-cluster"
+      cluster_parameter_group_name:                <computed>
+      cluster_public_key:                          <computed>
+      cluster_revision_number:                     <computed>
+      cluster_security_groups.#:                   <computed>
+      cluster_subnet_group_name:                   "thuy-redshift-cluster"
+      cluster_type:                                <computed>
+      cluster_version:                             "1.0"
+      database_name:                               "testdb"
+      enable_logging:                              "false"
+      encrypted:                                   <computed>
+      endpoint:                                    <computed>
+      enhanced_vpc_routing:                        <computed>
+      iam_roles.#:                                 <computed>
+      kms_key_id:                                  <computed>
+      master_password:                             <sensitive>
+      master_username:                             "foo"
+      node_type:                                   "dc1.large"
+      number_of_nodes:                             "1"
+      port:                                        "5439"
+      preferred_maintenance_window:                <computed>
+      publicly_accessible:                         "true"
+      s3_key_prefix:                               <computed>
+      skip_final_snapshot:                         "false"
+      vpc_security_group_ids.#:                    <computed>
+
+  + module.my-redshift.aws_redshift_subnet_group.redshift_subnet
+      id:                                          <computed>
+      description:                                 "Managed by Terraform"
+      name:                                        "thuy-redshift-cluster"
+      subnet_ids.#:                                <computed>
+      tags.%:                                      "1"
+      tags.environment:                            "Test"
+
+  + module.my-s3.aws_iam_policy.s3_bucket_policy
+      id:                                          <computed>
+      arn:                                         <computed>
+      name:                                        "thuy-redshift-bucket-policy"
+      path:                                        "/"
+      policy:                                      "{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n            \"Effect\": \"Allow\",\n            \"Action\": [\n                \"s3:*\"\n            ],\n            \"Resource\": \"${aws_s3_bucket.s3_bucket.arn}\"\n        }\n    ]\n}\n"
+
+  + module.my-s3.aws_iam_policy_attachment.s3_bucket_policy_attachment
+      id:                                          <computed>
+      name:                                        "thuy-redshift-bucket-policy-attachment"
+      policy_arn:                                  "${aws_iam_policy.s3_bucket_policy.arn}"
+      roles.#:                                     "1"
+      roles.656690768:                             "thuy-redshift-bucket-role"
+
+  + module.my-s3.aws_iam_role.s3_bucket_role
+      id:                                          <computed>
+      arn:                                         <computed>
+      assume_role_policy:                          "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Effect\": \"Allow\",\n      \"Principal\": {\n        \"Service\": \"redshift.amazonaws.com\"\n      },\n      \"Action\": \"sts:AssumeRole\"\n    }\n  ]\n}\n"
+      create_date:                                 <computed>
+      force_detach_policies:                       "false"
+      name:                                        "thuy-redshift-bucket-role"
+      path:                                        "/"
+      unique_id:                                   <computed>
+
+  + module.my-s3.aws_s3_bucket.s3_bucket
+      id:                                          <computed>
+      acceleration_status:                         <computed>
+      acl:                                         "private"
+      arn:                                         <computed>
+      bucket:                                      "thuy-redshift-bucket"
+      bucket_domain_name:                          <computed>
+      force_destroy:                               "false"
+      hosted_zone_id:                              <computed>
+      region:                                      "us-west-1"
+      request_payer:                               <computed>
+      versioning.#:                                <computed>
+      website_domain:                              <computed>
+      website_endpoint:                            <computed>
+
+  + module.my-vpc.aws_internet_gateway.vpc-igw
+      id:                                          <computed>
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_route_table.vpc_internet
+      id:                                          <computed>
+      propagating_vgws.#:                          <computed>
+      route.#:                                     "1"
+      route.~3482878966.cidr_block:                "0.0.0.0/0"
+      route.~3482878966.egress_only_gateway_id:    ""
+      route.~3482878966.gateway_id:                "${aws_internet_gateway.vpc-igw.id}"
+      route.~3482878966.instance_id:               ""
+      route.~3482878966.ipv6_cidr_block:           ""
+      route.~3482878966.nat_gateway_id:            ""
+      route.~3482878966.network_interface_id:      ""
+      route.~3482878966.vpc_peering_connection_id: ""
+      tags.%:                                      "1"
+      tags.Name:                                   "route-fox-to-internet"
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_route_table_association.vpc_pub_internet[0]
+      id:                                          <computed>
+      route_table_id:                              "${aws_route_table.vpc_internet.id}"
+      subnet_id:                                   "${aws_subnet.subnet_public.*.id[count.index]}"
+
+  + module.my-vpc.aws_route_table_association.vpc_pub_internet[1]
+      id:                                          <computed>
+      route_table_id:                              "${aws_route_table.vpc_internet.id}"
+      subnet_id:                                   "${aws_subnet.subnet_public.*.id[count.index]}"
+
+  + module.my-vpc.aws_subnet.subnet_private[0]
+      id:                                          <computed>
+      assign_ipv6_address_on_creation:             "false"
+      availability_zone:                           "us-west-1a"
+      cidr_block:                                  "10.101.2.0/24"
+      ipv6_cidr_block:                             <computed>
+      ipv6_cidr_block_association_id:              <computed>
+      map_public_ip_on_launch:                     "false"
+      tags.%:                                      "1"
+      tags.Name:                                   "fox-private-us-west-1a"
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_subnet.subnet_private[1]
+      id:                                          <computed>
+      assign_ipv6_address_on_creation:             "false"
+      availability_zone:                           "us-west-1c"
+      cidr_block:                                  "10.101.3.0/24"
+      ipv6_cidr_block:                             <computed>
+      ipv6_cidr_block_association_id:              <computed>
+      map_public_ip_on_launch:                     "false"
+      tags.%:                                      "1"
+      tags.Name:                                   "fox-private-us-west-1c"
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_subnet.subnet_public[0]
+      id:                                          <computed>
+      assign_ipv6_address_on_creation:             "false"
+      availability_zone:                           "us-west-1a"
+      cidr_block:                                  "10.101.0.0/24"
+      ipv6_cidr_block:                             <computed>
+      ipv6_cidr_block_association_id:              <computed>
+      map_public_ip_on_launch:                     "false"
+      tags.%:                                      "1"
+      tags.Name:                                   "fox-public-us-west-1a"
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_subnet.subnet_public[1]
+      id:                                          <computed>
+      assign_ipv6_address_on_creation:             "false"
+      availability_zone:                           "us-west-1c"
+      cidr_block:                                  "10.101.1.0/24"
+      ipv6_cidr_block:                             <computed>
+      ipv6_cidr_block_association_id:              <computed>
+      map_public_ip_on_launch:                     "false"
+      tags.%:                                      "1"
+      tags.Name:                                   "fox-public-us-west-1c"
+      vpc_id:                                      "${aws_vpc.vpc.id}"
+
+  + module.my-vpc.aws_vpc.vpc
+      id:                                          <computed>
+      assign_generated_ipv6_cidr_block:            "false"
+      cidr_block:                                  "10.101.0.0/16"
+      default_network_acl_id:                      <computed>
+      default_route_table_id:                      <computed>
+      default_security_group_id:                   <computed>
+      dhcp_options_id:                             <computed>
+      enable_classiclink:                          <computed>
+      enable_classiclink_dns_support:              <computed>
+      enable_dns_hostnames:                        "true"
+      enable_dns_support:                          "true"
+      instance_tenancy:                            <computed>
+      ipv6_association_id:                         <computed>
+      ipv6_cidr_block:                             <computed>
+      main_route_table_id:                         <computed>
+      tags.%:                                      "1"
+      tags.Name:                                   "fox"
+Plan: 15 to add, 0 to change, 0 to destroy.
+
+------------------------------------------------------------------------
+
+Note: You didn't specify an "-out" parameter to save this plan, so Terraform
+can't guarantee that exactly these actions will be performed if
+"terraform apply" is subsequently run.
+
