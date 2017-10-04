@@ -5,9 +5,9 @@ variable "redshift" {
   description = "About the redshift."
 }
 
-variable "redshift-security-subnet-ids" {
+variable "redshift-subnet-ids" {
   type        = "list"
-  description = "The redshift security subnet ids."
+  description = "The redshift subnet ids."
 }
 
 variable "redshift-role-arns" {
